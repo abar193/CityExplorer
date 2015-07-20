@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://java.sun.com/xml/ns/javaee">
+<head>
+    <title>City explorer app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+        html {
+            overflow:hidden;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            overflow:hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #E6E6E6;
+            font-family: "DroidSans", "nokia-pure-text", arial, sans-serif;
+            font-size: 11px;
+        }
+
+        #mapContainer {
+            width: 100%;
+            height: 85%;
+        }
+        #dialog {
+            width: 100%;
+            height: 15%;
+            left: 10%;
+            top:0%;
+            background-color: #124191;
+            color: #FFFFFF;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+    <script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="/js/code.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="/js/jquery-2.0.3.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<div id="mapContainer"></div>
+<div id="dialog">
+        <div class="info">HERE hackaton, project by Anton Bardishev</div>
+        <div class="sitelogo"></div>
+        <table width="40%" align="center">
+            <tr>
+                <td><h3 sype="font-size: 12px">User name:</h3></td>
+                <td><span id="userinfo" stype="font-size: 11px"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="text" id="textInput" value="testUser"/>
+                    <button onclick="applyUser()">Apply user</button>
+                    <button onclick="sendData()">Save point</button>
+                    <button onclick="appendData()">Append to last point</button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+<script>
+    init();
+</script>
+</html>
