@@ -54,5 +54,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.9.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.12" level="project" />
+    <orderEntry type="library" name="Maven: com.heroku.sdk:heroku-jdbc:0.1.0" level="project" />
   </component>
 </module>
