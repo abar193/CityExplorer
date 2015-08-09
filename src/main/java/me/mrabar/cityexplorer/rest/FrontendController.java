@@ -1,4 +1,4 @@
-package me.mrabar.cityexplorer;
+package me.mrabar.cityexplorer.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package me.mrabar.cityexplorer.model.Shapes;
+package me.mrabar.cityexplorer.model.shapes;
 
 import me.mrabar.cityexplorer.model.Point;
 import me.mrabar.cityexplorer.model.PointDTO;

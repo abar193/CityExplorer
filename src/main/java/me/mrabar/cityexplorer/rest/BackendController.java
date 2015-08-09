@@ -1,10 +1,10 @@
-package me.mrabar.cityexplorer;
+package me.mrabar.cityexplorer.rest;
 
 
 import me.mrabar.cityexplorer.controllers.Repo;
 import me.mrabar.cityexplorer.model.Point;
 import me.mrabar.cityexplorer.model.PointDTO;
-import me.mrabar.cityexplorer.model.Shapes.BerlinRectangle;
+import me.mrabar.cityexplorer.model.shapes.BerlinRectangle;
 import me.mrabar.cityexplorer.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
