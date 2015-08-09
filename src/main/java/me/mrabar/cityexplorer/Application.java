@@ -1,4 +1,4 @@
-package here.cityexplorer;
+package me.mrabar.cityexplorer;
 
 
 import org.springframework.boot.SpringApplication;

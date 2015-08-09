@@ -4,7 +4,7 @@ var bounds = new H.geo.Rect(52.55405421, 13.28671947, 52.46629387, 13.47898021);
 var coord;
 var marker;
 var behavior;
-var rectangles = [];
+var points = [];
 
 function init() {
     platform = new H.service.Platform({
@@ -23,6 +23,7 @@ function init() {
     centerAt();
     addRectangleToMap(map);
     setUpClickListener();
+    //ajaxRequest("/shape/0/points", rectanglePoints, dataPrinter, "GET");
 }
 
 function centerAt() {
@@ -73,13 +74,13 @@ function dataPrinter(data) {}
 
 function sendData() {
     if(window.userName) {
-        ajaxRequest("/point?user=" + window.userName, updateUser, dataPrinter, "PUT", coord);
+        ajaxRequest("/point/new?user=" + window.userName, updateUser, dataPrinter, "PUT", coord);
     }
 }
 
 function appendData() {
     if(window.userName) {
-        ajaxRequest("/append?user=" + window.userName, updateUser, dataPrinter, "PUT", coord);
+        ajaxRequest("/point/old?user=" + window.userName, updateUser, dataPrinter, "PUT", coord);
     }
 }
 
@@ -138,25 +139,37 @@ function addRectangleToMap(map) {
 }
 
 function fillUserInfo(data) {
-    console.log(data['totalCovered']);
-    $('#userinfo').html("Total covered: " + (data['totalCovered']/100) + "%");
+    console.log(data['result']);
+    $('#userinfo').html("Total covered: " + (data['result']) + "%");
 }
 
-function fillRectangles(data) {
-    map.removeObjects(rectangles);
-    rectangles = [];
+function rectanglePoints(data) {
+    var customStyle = {
+        fillColor: 'rgba(0, 0, 250, 0.6)',
+        lineWidth: 0
+    };
+    for(i in data) {
+        var point = data[i];
+        var pObj = new H.map.Circle({lat: point.lat, lng: point.lng}, point.radiusKm * 1000,
+            { style: customStyle });
+        map.addObject(pObj);
+    }
+}
+
+function fillPoints(data) {
+    map.removeObjects(points);
+    points = [];
     var customStyle = {
         fillColor: 'rgba(92, 234, 0, 0.4)',
         lineWidth: 0
-      };
-    console.log("Here!");
+    };
     var array = data;
     for(i in array) {
-        var rectangle = data[i];
-        var rObj = new H.map.Rect(new H.geo.Rect(rectangle.start.lat, rectangle.start.lng, rectangle.end.lat, rectangle.end.lng),
+        var point = data[i];
+        var pObj = new H.map.Circle({lat: point.lat, lng: point.lng}, point.radiusKm * 1000,
                        { style: customStyle });
-        rectangles.push(rObj);
-        map.addObject(rObj);
+        points.push(pObj);
+        map.addObject(pObj);
 
     }
     console.log("Finish!");
@@ -169,6 +182,11 @@ function applyUser() {
 }
 
 function updateUser() {
-    ajaxRequest("/greeting?user=" + window.userName, fillUserInfo, dataPrinter, "GET");
-    ajaxRequest("/rectangles?user=" + window.userName, fillRectangles, dataPrinter, "GET");
+    ajaxRequest("/greeting?user=" + window.userName, dataPrinter, dataPrinter, "GET");
+    ajaxRequest("/shape/0?user=" + window.userName, fillUserInfo, dataPrinter, "GET");
+    ajaxRequest("/points?user=" + window.userName, fillPoints, dataPrinter, "GET");
+}
+
+function percentage() {
+    ajaxRequest("/shape/0?user=" + window.userName, fillUserInfo, dataPrinter, "GET");
 }
