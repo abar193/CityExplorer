@@ -6,6 +6,10 @@ var marker;
 var behavior;
 var points = [];
 
+function getCoord() {
+    return coord;
+}
+
 function init() {
     platform = new H.service.Platform({
       app_id: 'xlhHum3tyAYaSM8AgAdN',
@@ -48,40 +52,6 @@ function centerAt() {
           map.setCenter(center);
         }
       });
-}
-
-function ajaxRequest(path, success, error, method, body) {
-    var my_request = {
-            url: path,
-            crossDomain: true,
-            dataType: 'json',
-            xhrFields: {
-                withCredentials: true
-            },
-            success: success,
-            error: error,
-            complete: function() {},
-            method: method
-        };
-        if(body) {
-            my_request['data'] = JSON.stringify(body);
-            my_request['contentType'] = "application/json; charset=utf-8";
-        }
-        $.ajax(my_request);
-}
-
-function dataPrinter(data) {}
-
-function sendData() {
-    if(window.userName) {
-        ajaxRequest("/point/new?user=" + window.userName, updateUser, dataPrinter, "PUT", coord);
-    }
-}
-
-function appendData() {
-    if(window.userName) {
-        ajaxRequest("/point/old?user=" + window.userName, updateUser, dataPrinter, "PUT", coord);
-    }
 }
 
 function setUpClickListener() {
@@ -173,20 +143,4 @@ function fillPoints(data) {
 
     }
     console.log("Finish!");
-}
-
-function applyUser() {
-    window.userName = $('#textInput').val();
-    console.log(window.userName);
-    updateUser();
-}
-
-function updateUser() {
-    ajaxRequest("/greeting?user=" + window.userName, dataPrinter, dataPrinter, "GET");
-    ajaxRequest("/shape/0?user=" + window.userName, fillUserInfo, dataPrinter, "GET");
-    ajaxRequest("/points?user=" + window.userName, fillPoints, dataPrinter, "GET");
-}
-
-function percentage() {
-    ajaxRequest("/shape/0?user=" + window.userName, fillUserInfo, dataPrinter, "GET");
 }

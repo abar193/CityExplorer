@@ -19,7 +19,7 @@ public class Point extends PointDTO {
 
     public int getUserID() {
         return userID;
-    }
+    }g
 
     public void setUserID(int userID) {
         this.userID = userID;
